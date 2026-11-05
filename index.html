@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>OpenOrigin</title>
+<meta name="description" content="From OpenOrigin, which contributes code for the community to improve the internet.">
+<meta property="og:title" content="OpenOrigin"><meta property="og:description" content="From OpenOrigin, which contributes code for the community to improve the internet."><meta property="og:url" content="https://purposeprotocol.ai/">
+<link rel="canonical" href="https://purposeprotocol.ai/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%22-4%20-12%2085%2068%22%20fill%3D%22%231b1f1d%22%3E%3Cpath%20d%3D%22M25.8%2045L13.1%2023L63.9%2023L51.2%2045Z%22/%3E%3Cpath%20d%3D%22M13.1%2021L25.8%20-1L51.2%20-1L63.9%2021Z%22/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{--bg:#f4f3ea;--fg:#1b1f1d;--muted:#5f665f;--rule:#dddbcc;--surface:#fbfaf4;--pill:#e9e8da;--accent:#46682f;--code:#1b1f1d;--code-fg:#e9e9e2;--code-muted:#a2a597;
+--display:"Newsreader",Georgia,serif;--body:"IBM Plex Sans",system-ui,sans-serif;--mono:"IBM Plex Mono",ui-monospace,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141512;--fg:#e9e9e2;--muted:#a2a597;--rule:#393b32;--surface:#1b1c18;--pill:#2a2b24;--accent:#a3c77a;--code:#0e0f0c;--code-fg:#e9e9e2;--code-muted:#a2a597;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#141512;--fg:#e9e9e2;--muted:#a2a597;--rule:#393b32;--surface:#1b1c18;--pill:#2a2b24;--accent:#a3c77a;--code:#0e0f0c;--code-fg:#e9e9e2;--code-muted:#a2a597;color-scheme:dark}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;
+min-height:100svh;display:flex;flex-direction:column;padding-block:max(24px,env(safe-area-inset-top,0px)) max(24px,env(safe-area-inset-bottom,0px));
+padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+a{color:inherit;text-underline-offset:3px;text-decoration-color:var(--rule)}
+a:hover{text-decoration-color:currentColor}
+.top,.foot,main{width:100%;max-width:40rem;margin-inline:auto}
+.top{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:15px;color:var(--muted)}
+.top a{text-decoration:none}
+/* The bookmark, as inc.magnitude.money draws it for the page you're on
+   (IncGrid.tsx, components.css .inc-grid-card-popout): lucide's Bookmark on
+   a 32px chip, a step under inc's 40 beside this smaller text (Erik, 2026-11-04), and a tooltip that says how, since a page can't add one. */
+.bm{position:relative;display:grid;place-items:center;flex:none;width:32px;height:32px;border-radius:6px;background:var(--pill);color:var(--muted);transition:background-color 150ms ease}
+.bm:hover{background:var(--rule)}
+.bm svg{width:16px;height:16px}
+@media (hover:hover){.bm[data-tip]::after{content:attr(data-tip);position:absolute;top:calc(100% + 8px);left:0;z-index:20;padding:4px 12px;border-radius:8px;background:var(--fg);color:var(--bg);font-family:var(--body);font-size:15px;line-height:1.4;white-space:nowrap;pointer-events:none;opacity:0;transform:translateY(-4px);transition:opacity 120ms ease,transform 120ms ease}
+.bm[data-tip]:hover::after{opacity:1;transform:none;transition-delay:300ms}}
+@media (hover:hover) and (prefers-reduced-motion:reduce){.bm[data-tip]::after,.bm[data-tip]:hover::after{transform:none;transition:opacity 120ms ease}}
+.made{display:inline-flex;align-items:center;gap:8px}
+.made svg{width:21px;height:12px;flex:none}
+.route .preview{margin-left:auto;white-space:nowrap}
+/* Anchored from the top, not centred, so a definition opening grows the page
+   downward and nothing above it moves (Erik, 2026-11-05). */
+main{flex:1;display:flex;flex-direction:column;justify-content:flex-start;gap:24px;padding-block:max(64px,14vh) 64px}
+.head{display:flex;flex-direction:column;align-items:flex-start;gap:16px}
+.mark{color:var(--fg)}
+.pill{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;background:var(--pill);color:var(--fg);border-radius:999px;padding:4px 12px;margin:0}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(40px,8vw,64px);line-height:1.05;letter-spacing:-.02em;margin:0;text-wrap:balance}
+.line{font-size:clamp(18px,2.6vw,20px);line-height:1.5;margin:0;max-width:34rem;text-wrap:pretty}
+.note{color:var(--muted);margin:0}
+.route{font-family:var(--mono);font-size:14px;display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0}
+.route b{font-weight:500;font-size:12px;letter-spacing:.08em;background:var(--accent);color:var(--bg);border-radius:4px;padding:2px 8px}
+.code{background:var(--code);color:var(--code-fg);border-radius:12px;overflow:hidden;font-family:var(--mono);font-size:13px;line-height:1.6}
+.code div{display:flex;justify-content:space-between;align-items:center;padding:8px 16px;border-bottom:1px solid #2c2e27;color:var(--code-muted);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.code pre{margin:0;padding:16px;overflow-x:auto}
+.code pre+div{border-top:1px solid #2c2e27}
+.code button{font:inherit;color:var(--code-muted);background:none;border:0;padding:0;cursor:pointer;letter-spacing:inherit;text-transform:inherit}
+.code button:hover{color:var(--code-fg)}
+.list h2{font-family:var(--mono);font-weight:400;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
+.list ul{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule)}
+.list li{border-bottom:1px solid var(--rule);padding:12px 0}
+.list .row{display:flex;gap:4px;align-items:center}
+.list .row .d{margin-left:auto;padding-left:16px}
+.list a{text-decoration:none}
+.list a.n:hover{text-decoration:underline;text-underline-offset:3px}
+.list .n{font-family:var(--display);font-size:20px}
+.list .d{font-family:var(--mono);font-size:12px;color:var(--muted)}
+/* The (i) after each name, inc's .inc-card-toc-info: a 16px lucide Info in
+   4px of padding, muted, filling to a dark chip while open (MagnitudeWeb
+   styles/components.css .inc-card-toc-info). */
+.info{all:unset;display:flex;padding:4px;border-radius:999px;color:var(--muted);cursor:pointer;transition:color 150ms ease}
+.info svg{width:16px;height:16px}
+.info:hover,.info[aria-expanded="true"]{color:var(--fg)}
+.info[aria-expanded="true"] svg circle{fill:currentColor}
+.info[aria-expanded="true"] svg path{stroke:var(--bg)}
+.info:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.def{margin:4px 0 0;color:var(--muted);font-size:15px;max-width:34rem}
+/* The arrow starts at the parent's text edge and is the indent (Erik, 2026-11-05: "move the children rows left"). */
+.list .child{padding-left:0}
+.list .child .nest{width:16px;height:16px;flex:none;margin-right:4px;color:var(--muted);align-self:center}
+.list .here>.row>.n::after{content:" ·";color:var(--accent)}
+.foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px;font-size:13px;color:var(--muted);border-top:1px solid var(--rule);padding-top:16px}
+.foot a{text-decoration:none}
+.foot a:hover{color:var(--fg)}
+.mark{all:unset;cursor:pointer;color:var(--fg);display:inline-block;padding:4px 0}
+.mark:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:4px}
+.top .mk{cursor:pointer}
+.mk{position:relative;display:inline-block;line-height:0}
+.mk svg{display:block;overflow:visible}
+.mk-r1,.mk-r2,.mk-hg2{transform-box:view-box;transition:transform 450ms cubic-bezier(.65,0,.35,1),opacity 250ms ease}
+.mk-r2,.mk-hg2{opacity:0;transform:translateX(8px)}
+.mk[data-double-r] .mk-r1{transform:none}
+.mk[data-double-r] .mk-r2{opacity:1;transform:none}
+.mk[data-hg-pair] .mk-r1{transform:none}
+.mk[data-hg-pair] .mk-hg2{opacity:1;transform:none}
+.mk[data-hg-phase="swap"] .mk-r1,.mk[data-hg-phase="swap"] .mk-hg2{transition:none}
+.mk[data-hg-pair][data-hg-phase="swap"] .mk-r1{transform:translateX(27.8px)}
+.mk[data-hg-pair][data-hg-phase="swap"] .mk-hg2,.mk[data-hg-phase="return"] .mk-hg2{transform:translateX(-27.8px)}
+.mk[data-hg-phase="return"] .mk-hg2{transition:opacity 250ms ease}
+.mk-left,.mk-right{transition:d 450ms cubic-bezier(.65,0,.35,1)}
+.mk-slash{transform-box:fill-box;transform-origin:50% 100%;transform:scaleY(0);transition:transform 450ms cubic-bezier(.65,0,.35,1)}
+.mk[data-currency] .mk-slash{transform:none}
+.mk[data-hexagon] .mk-right{transform-box:view-box;transition:transform 450ms cubic-bezier(.65,0,.35,1)}
+.mk[data-currency] .mk-right{transform:translateY(-24px)}
+.mk-diamond{opacity:0}
+.mk[data-fleet] .mk-diamond{opacity:1}
+/* Inc centres its mark, so its pair spreads both ways. Here the mark is
+   left-aligned with the headline, so the first form stays put and the
+   second grows to its right (Erik, 2026-11-04). */
+.mk[data-flip]{--turn:0deg;perspective:12em}
+.mk[data-flip] .mk-face,.mk-back{backface-visibility:hidden;transition:transform 450ms cubic-bezier(.65,0,.35,1)}
+.mk[data-flip] .mk-face{transform:rotateY(var(--turn))}
+.mk-back{position:absolute;inset:0;transform:rotateY(calc(var(--turn) - 180deg))}
+@media (prefers-reduced-motion:reduce){
+.mk *{transition:none!important}
+.mk[data-flip] .mk-face,.mk-back{transform:none}
+.mk-back{opacity:0}
+.mk[data-hourglass] .mk-face{opacity:0}
+.mk[data-hourglass] .mk-back{opacity:1}}
+/* Addresses draw their underline in from the left, inc's canonical link hover
+   (MagnitudeWeb .blog-title-draw on .inc-grid-card-url; Erik, 2026-11-05).
+   Hovering the bookmark chip draws its address too. */
+.url,.list a.d{text-decoration:none;background-image:linear-gradient(currentColor,currentColor);background-repeat:no-repeat;background-position:100% 100%;background-size:0% 1px;padding-bottom:1px}
+.url:hover,.url:focus-visible,.list a.d:hover,.list a.d:focus-visible,.top:has(.bm:hover) .url{background-position:0% 100%;background-size:100% 1px}
+.list a.d{background-origin:content-box}
+@media (prefers-reduced-motion:no-preference){.url,.list a.d{transition:background-size 420ms cubic-bezier(.22,1,.36,1)}}
+@media (forced-colors:active){.url:hover,.list a.d:hover{text-decoration:underline}}
+/* Child rows: the definition starts where the name does, past the arrow
+   (Erik, 2026-11-05); their (i) and code icon sit on the right. */
+.list .child .def,.list .child .childcode{margin-left:24px}
+.list .child .childcode{margin-top:8px}
+.list .row .tools{margin-left:auto;display:flex;gap:4px;align-items:center}
+.codebtn{all:unset;display:flex;padding:4px;border-radius:999px;color:var(--muted);cursor:pointer;transition:color 150ms ease}
+.codebtn svg,.info svg{width:16px;height:16px}
+.codebtn:hover,.codebtn[aria-expanded="true"]{color:var(--fg)}
+.codebtn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+/* BrainBridge's actions, where its address was (Erik, 2026-11-05). */
+.list .row .acts{margin-left:auto;display:flex;gap:8px;padding-left:16px}
+.act{all:unset;cursor:pointer;font-family:var(--mono);font-size:12px;letter-spacing:.04em;padding:4px 12px;border-radius:999px;border:1px solid var(--rule);color:var(--fg);white-space:nowrap;transition:background-color 150ms ease}
+.act:hover{background:var(--pill)}
+.act:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media (max-width:480px){.list .row{flex-wrap:wrap}.list .row .acts{margin-left:0;padding-left:0;width:100%;padding-top:8px}}
+dialog.agent{width:min(640px,calc(100vw - 32px));max-height:min(80vh,720px);padding:24px;border:1px solid var(--rule);border-radius:16px;background:var(--bg);color:var(--fg)}
+dialog.agent::backdrop{background:color-mix(in srgb,var(--fg) 35%,transparent)}
+.agent-head{display:flex;align-items:baseline;gap:16px}
+.agent-head h2{font-family:var(--display);font-weight:400;font-size:28px;margin:0;flex:1}
+.agent-close{all:unset;cursor:pointer;font-size:24px;line-height:1;color:var(--muted);padding:0 4px}
+.agent-close:hover{color:var(--fg)}
+dialog.agent p{color:var(--muted);margin:8px 0 16px}
+dialog.agent pre{white-space:pre-wrap;max-height:50vh;overflow:auto}
+.preview{font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--muted)}
+</style></head>
+<body>
+<header class="top"><a class="bm" href="https://purposeprotocol.ai" data-tip="Press ⌘D to bookmark" aria-label="Bookmark purposeprotocol.ai"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg></a><a class="url" href="https://purposeprotocol.ai">purposeprotocol.ai</a><span aria-hidden="true">/</span><a href="https://openorigin.sh">OpenOrigin</a></header>
+<main>
+<div class="head">
+<button type="button" class="mark" aria-label="Play the mark"><span class="mk" data-kind="hexagon" data-hexagon aria-hidden="true"><svg viewBox="13.1 0 77 44" width="70.0" height="40" fill="currentColor" class="mk-face" aria-hidden="true"><g class="mk-r1"><path class="mk-left" d="M25.8 45L13.1 23L63.9 23L51.2 45Z"/><path class="mk-right" d="M13.1 21L25.8 -1L51.2 -1L63.9 21Z"/><path class="mk-slash" d="M13.1 -1H51.2L63.9 21H25.8Z"/><path class="mk-diamond" d="M38.95 24H64.35L52.8 44H27.4Z"/></g></svg></span></button>
+<p class="pill">Standards</p>
+<h1>Coming soon</h1>
+<p class="line">From OpenOrigin, which contributes code for the community to improve the internet.</p>
+</div>
+
+</main>
+<footer class="foot"><span class="made"><svg viewBox="0 0 77 44" fill="currentColor" aria-label="Magnitude"><path d="M0 44L25.4033 0L38.1051 22L25.4033 44Z"/><path d="M38.1051 22L50.8066 0L76.2101 44L50.8069 44Z"/></svg>© 2026</span><a href="https://inc.magnitude.money">Made by Magnitude</a></footer>
+<script>
+(function(){
+var HG=['M13.1 45L25.8 23L51.2 23L63.9 45Z','M25.8 21L13.1 -1L63.9 -1L51.2 21Z'];
+var HGC=['M25.8 44L38.5 22L38.5 22L51.2 44Z','M38.5 22L25.8 0L51.2 0L38.5 22Z'];
+var reduced=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
+function setHg(m,closed){var p=closed?HGC:HG;m.querySelector('.mk-left').setAttribute('d',p[0]);m.querySelector('.mk-right').setAttribute('d',p[1]);m.toggleAttribute('data-hg-pair',closed)}
+function on(m){var k=m.dataset.kind;
+ if(k==='M')return (+m.dataset.turns||0)%2===1;
+ if(k==='hourglass')return m.hasAttribute('data-hg-pair');
+ if(k==='hexagon')return m.hasAttribute('data-currency');
+ return m.hasAttribute('data-double-r')}
+function tap(m){var k=m.dataset.kind;
+ if(k==='M'){var t=(+m.dataset.turns||0)+1;m.dataset.turns=t;m.style.setProperty('--turn',t*180+'deg');m.toggleAttribute('data-hourglass',t%2===1);return}
+ if(k==='hexagon'){m.toggleAttribute('data-currency');return}
+ if(k==='r'||k==='F'){m.toggleAttribute('data-double-r');return}
+ if(k==='hourglass'){var closed=m.hasAttribute('data-hg-pair');
+  if(!closed||reduced())return setHg(m,!closed);
+  m.dataset.hgPhase='swap';
+  requestAnimationFrame(function(){requestAnimationFrame(function(){m.dataset.hgPhase='return';setHg(m,false);clearTimeout(m._p);m._p=setTimeout(function(){delete m.dataset.hgPhase},500)})})}}
+function play(m){tap(m);clearTimeout(m._b);m._b=setTimeout(function(){if(on(m))tap(m)},2000)}
+document.querySelectorAll('.mark').forEach(function(b){b.addEventListener('click',function(){play(b.querySelector('.mk'))})});
+document.querySelectorAll('.bm').forEach(function(b){if(!/Mac|iPhone|iPad/.test(navigator.platform||navigator.userAgent))b.dataset.tip='Press Ctrl+D to bookmark'});
+document.querySelectorAll('.top .mk').forEach(function(m){m.addEventListener('click',function(e){e.preventDefault();play(m)})});
+})();
+</script>
+
+
+
+</body></html>
