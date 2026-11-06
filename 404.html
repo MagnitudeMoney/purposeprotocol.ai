@@ -133,6 +133,9 @@ h1{font-family:var(--display);font-weight:400;font-size:clamp(40px,8vw,64px);lin
 .list .row .acts{margin-left:auto;display:flex;gap:8px;padding-left:16px}
 .act{all:unset;cursor:pointer;font-family:var(--mono);font-size:12px;letter-spacing:.04em;padding:4px 12px;border-radius:999px;border:1px solid var(--rule);color:var(--fg);white-space:nowrap;transition:background-color 150ms ease}
 .act:hover{background:var(--pill)}
+/* Tell my agent is the page's main action, so it is solid (Erik, 2026-11-05). */
+.act[data-agent^="agent-"]{background:var(--fg);color:var(--bg);border-color:var(--fg);font-size:13px;padding:8px 16px}
+.act[data-agent^="agent-"]:hover{background:var(--fg);opacity:.85}
 .act:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 @media (max-width:480px){.list .row{flex-wrap:wrap}.list .row .acts{margin-left:0;padding-left:0;width:100%;padding-top:8px}}
 dialog.agent{width:min(640px,calc(100vw - 32px));max-height:min(80vh,720px);padding:24px;border:1px solid var(--rule);border-radius:16px;background:var(--bg);color:var(--fg)}
