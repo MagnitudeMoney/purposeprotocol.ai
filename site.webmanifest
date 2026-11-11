@@ -1,0 +1,27 @@
+{
+ "name": "OpenOrigin",
+ "short_name": "OpenOrigin",
+ "description": "From OpenOrigin, which contributes code for the community to improve the internet and AI.",
+ "start_url": "/",
+ "display": "browser",
+ "background_color": "#f4f3ea",
+ "theme_color": "#f4f3ea",
+ "lang": "en",
+ "icons": [
+  {
+   "src": "/icon-192.png",
+   "sizes": "192x192",
+   "type": "image/png"
+  },
+  {
+   "src": "/icon-512.png",
+   "sizes": "512x512",
+   "type": "image/png"
+  },
+  {
+   "src": "/favicon.svg",
+   "sizes": "any",
+   "type": "image/svg+xml"
+  }
+ ]
+}

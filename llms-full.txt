@@ -1,0 +1,26 @@
+# OpenOrigin
+
+> From OpenOrigin, which contributes code for the community to improve the internet and AI.
+
+---
+
+URL: https://purposeprotocol.ai/
+
+Standards
+
+# Coming soon
+
+From OpenOrigin, which contributes code for the community to improve the internet and AI.
+
+Claude, Codex, ChatGPT, Gemini and Cursor are trademarks of their respective owners.
+
+Use it, change it and share it, commercially too. In return:
+
+- Keep the copyright notice and a copy of the license.
+- Credit the authors: keep the attributions in the NOTICE file.
+- Mark the files you change.
+- Don’t use Magnitude’s names or marks to promote your work.
+- Each contributor licenses you any patent of theirs the code needs; that ends if you sue claiming the code infringes a patent.
+- It comes as is, with no warranty.
+
+[Read the license](https://www.apache.org/licenses/LICENSE-2.0)
