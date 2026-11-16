@@ -1,0 +1,17 @@
+# OpenOrigin
+
+> From OpenOrigin, which contributes code for the community to improve the internet and AI.
+
+OpenOrigin is made by Magnitude Inc. (https://www.magnitude.money/).
+
+## Pages
+
+- [OpenOrigin](https://purposeprotocol.ai/): From OpenOrigin, which contributes code for the community to improve the internet and AI.
+
+## Optional
+
+- [Full text](https://purposeprotocol.ai/llms-full.txt): every page above as plain Markdown
+- [Intent Infrastructure](https://intentinfrastructure.com/llms.txt): a sibling site, also from Magnitude
+- [OpenOrigin](https://openorigin.sh/llms.txt): a sibling site, also from Magnitude
+- [BrainBridge](https://brainbridge.sh/llms.txt): a sibling site, also from Magnitude
+- [Fleet Factory](https://fleetfactory.ai/llms.txt): a sibling site, also from Magnitude
